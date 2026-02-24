@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Documentación de Configuración - Trazabilidad de Software</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .header .materia {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 1rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        .content {
+            padding: 2.5rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 1.8rem;
+            border-left: 5px solid #667eea;
+            transition: transform 0.2s;
+        }
+
+        .section:hover {
+            transform: translateX(5px);
+        }
+
+        .section h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2 i {
+            font-size: 2rem;
+        }
+
+        .section h3 {
+            color: #4a5568;
+            font-size: 1.4rem;
+            margin: 1.2rem 0 1rem;
+            padding-left: 0.5rem;
+            border-left: 4px solid #9f7aea;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .card h4 {
+            color: #553c9a;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge {
+            background: #e9d8fd;
+            color: #553c9a;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .example-box {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.2rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin: 1rem 0;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            margin: 0.8rem 0;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .tip {
+            background: #c6f6d5;
+            border-left: 5px solid #38a169;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            color: #22543d;
+        }
+
+        .warning {
+            background: #fed7d7;
+            border-left: 5px solid #e53e3e;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            color: #742a2a;
+        }
+
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 1rem 0;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #5a67d8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .section {
+                padding: 1.2rem;
+            }
+        }
+
+        .emoji-large {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        .pasos-container {
+            counter-reset: paso;
+            list-style: none;
+        }
+
+        .paso-item {
+            counter-increment: paso;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background: white;
+            border-radius: 10px;
+            position: relative;
+            padding-left: 3.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .paso-item::before {
+            content: counter(paso);
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0.5rem;
+            top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Documentación de Configuración</h1>
+            <div class="subtitle">Trazabilidad y Configuración de Software - Semana 7</div>
+            <div class="materia">PE7: Documento Técnico Completo</div>
+        </div>
+
+        <div class="content">
+            <!-- Actividad Previa -->
+            <div class="section">
+                <h2><span class="emoji-large">🏠</span> Actividad Antes de Clase (10 min)</h2>
+                <div class="card">
+                    <h4>🤔 Piensa en instrucciones que hayas seguido</h4>
+                    <p>Reflexiona sobre alguna vez que hayas armado o configurado algo:</p>
+                    <ul style="margin-left: 2rem; margin-top: 0.8rem;">
+                        <li>¿Las instrucciones eran claras?</li>
+                        <li>¿Qué les faltaba?</li>
+                        <li>¿Cómo las mejorarías?</li>
+                    </ul>
+                    <div class="example-box">
+                        📝 Anota en tu cuaderno:
+                        • Lo que hicieron bien: __________
+                        • Lo que hicieron mal: __________
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teoría -->
+            <div class="section">
+                <h2><span class="emoji-large">💡</span> Parte Teórica</h2>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <h4>📚 ¿Qué es?</h4>
+                        <p>"El manual de instrucciones de tu software" - Como el manual de un electrodoméstico pero para programas.</p>
+                    </div>
+                    <div class="card">
+                        <h4>❓ ¿Por qué es importante?</h4>
+                        <ul>
+                            <li>Para que OTROS configuren sin ti</li>
+                            <li>Para que TÚ recuerdes cómo lo hiciste</li>
+                            <li>Para cuando algo falla</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📏 Estándar IEEE 829</h4>
+                        <p>Versión simplificada:</p>
+                        <ol>
+                            <li>Portada</li>
+                            <li>Introducción</li>
+                            <li>Requisitos</li>
+                            <li>Configuración</li>
+                            <li>Verificación</li>
+                            <li>Apéndice</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplo Comparativo -->
+            <div class="section">
+                <h2><span class="emoji-large">📊</span> Ejemplo: Mala vs Buena Documentación</h2>
+                
+                <div class="card-grid">
+                    <div class="card" style="border-left: 4px solid #e53e3e;">
+                        <h4 style="color: #c53030;">❌ MALA documentación</h4>
+                        <div class="example-box" style="background: #fed7d7; color: #742a2a;">
+                            App Clima - Cómo instalarla:
+                            1. Instalar
+                            2. Configurar
+                            3. Usar
+                            Fin.
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="border-left: 4px solid #38a169;">
+                        <h4 style="color: #2f855a;">✅ BUENA documentación</h4>
+                        <div class="example-box" style="background: #2d3748;">
+DOCUMENTACIÓN DE CONFIGURACIÓN - APP CLIMA v1.0
+
+1. DATOS DEL DOCUMENTO
+   Autor: María González
+   Fecha: 23/02/2026
+   Versión: 1.0
+
+2. REQUISITOS
+   • Hardware: 1.5 GHz, 4GB RAM
+   • Software: Node.js 18+, Navegador moderno
+   • Accesos: API Key de OpenWeatherMap
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mapa Mental -->
+            <div class="section">
+                <h2><span class="emoji-large">🧠</span> ¿Qué documentar?</h2>
+                
+                <div style="background: white; padding: 1.5rem; border-radius: 12px;">
+                    <pre style="font-family: monospace; line-height: 2; background: #edf2f7; padding: 1rem; border-radius: 8px;">
+MI PROYECTO: [Nombre de tu sistema]
+├── 📋 DATOS BÁSICOS
+│   ├── Nombre, Versión, Fecha, Autor
+├── ⚙️ REQUISITOS
+│   ├── Hardware, Software, Versiones, Accesos
+├── 🔧 PASOS DE CONFIGURACIÓN
+│   ├── Paso 1, Paso 2, Paso 3, Paso 4
+├── ✅ VERIFICACIÓN
+│   ├── Prueba 1, Prueba 2, Prueba 3
+├── ❓ PROBLEMAS COMUNES
+│   ├── Problema 1 + solución
+│   └── Problema 2 + solución
+└── 📞 CONTACTO Y SOPORTE
+                    </pre>
+                </div>
+            </div>
+
+            <!-- Taller Principal -->
+            <div class="section">
+                <h2><span class="emoji-large">🔧</span> Taller: Crear tu Documentación</h2>
+                
+                <div class="badge">Elige UNO de estos proyectos:</div>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <h4>✅ App de Tareas</h4>
+                        <p><strong>Necesita:</strong> Node.js 16+, MongoDB 5+, cuenta MongoDB Atlas</p>
+                        <p><strong>Variables:</strong> DB_CONNECTION, PORT, SECRET_KEY</p>
+                    </div>
+                    <div class="card">
+                        <h4>🍳 Sitio de Recetas</h4>
+                        <p><strong>Necesita:</strong> Apache/Nginx, PHP 8.0+, MySQL 5.7+</p>
+                        <p><strong>Variables:</strong> DB_HOST, DB_USER, DB_PASS, DB_NAME</p>
+                    </div>
+                    <div class="card">
+                        <h4>🤖 Bot de Telegram</h4>
+                        <p><strong>Necesita:</strong> Python 3.9+, Token de BotFather</p>
+                        <p><strong>Variables:</strong> TELEGRAM_TOKEN, ADMIN_ID</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">📋 Plantilla para completar</h3>
+                
+                <div class="example-box" style="max-height: 400px; overflow-y: auto;">
+==================================================
+DOCUMENTACIÓN DE CONFIGURACIÓN
+==================================================
+
+1. DATOS DEL DOCUMENTO
+   Proyecto: __________________________________
+   Autor: ____________________________________
+   Fecha: ____________________________________
+   Versión: __________________________________
+   Sistema: __________________________________
+
+2. DESCRIPCIÓN
+   ____________________________________________
+
+3. REQUISITOS TÉCNICOS
+   Hardware mínimo:
+   • Procesador: ______________________________
+   • RAM: ____________________________________
+   
+   Software necesario:
+   • Sistema operativo: _______________________
+   • __________________________________________
+
+4. CONFIGURACIÓN PASO A PASO
+   Paso 1: ____________________________________
+   Paso 2: ____________________________________
+   Paso 3: ____________________________________
+   Paso 4: ____________________________________
+
+5. VARIABLES DE ENTORNO
+   ┌──────────────┬──────────────┬─────────────┐
+   │   Variable   │  Descripción  │ Ejemplo     │
+   ├──────────────┼──────────────┼─────────────┤
+   │              │              │             │
+   └──────────────┴──────────────┴─────────────┘
+
+6. VERIFICACIÓN
+   Prueba 1: __________________________________
+   • Resultado esperado: ______________________
+
+7. PROBLEMAS COMUNES
+   Problema 1: ________________________________
+   Solución: __________________________________
+
+8. CONTACTO
+   • Correo: __________________________________
+                </div>
+            </div>
+
+            <!-- Ejemplo de Paso Bien Hecho -->
+            <div class="section">
+                <h2><span class="emoji-large">✨</span> Ejemplo: Cómo escribir un buen paso</h2>
+                
+                <div class="card-grid">
+                    <div class="card" style="border-left: 4px solid #e53e3e;">
+                        <h4 style="color: #c53030;">❌ MAL</h4>
+                        <p>"Configurar base de datos."</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid #38a169;">
+                        <h4 style="color: #2f855a;">✅ BIEN</h4>
+                        <p><strong>4.3 Configurar conexión a base de datos</strong></p>
+                        <p>a) Abrir archivo .env (carpeta raíz)<br>
+                        b) Buscar línea: DB_CONNECTION=<br>
+                        c) Escribir después del = la URL<br>
+                        d) Guardar (Ctrl+S)<br>
+                        ✅ Resultado: App se conecta sin errores</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reglas y Checklist -->
+            <div class="section">
+                <h2><span class="emoji-large">✅</span> Reglas de Oro y Checklist</h2>
+                
+                <div class="tip">
+                    <strong>🎯 REGLA DE ORO:</strong> Documenta como si la persona que lo lea no supiera nada y estuviera enojada.
+                </div>
+
+                <h3>📋 Checklist de calidad</h3>
+                <div class="checklist">
+                    <li><input type="checkbox"> ¿Tiene portada con tus datos?</li>
+                    <li><input type="checkbox"> ¿Tiene fecha y versión?</li>
+                    <li><input type="checkbox"> ¿Los pasos son fáciles de seguir?</li>
+                    <li><input type="checkbox"> ¿Alguien sin conocimientos podría seguirlos?</li>
+                    <li><input type="checkbox"> ¿Incluye requisitos de hardware/software?</li>
+                    <li><input type="checkbox"> ¿Tiene pruebas para verificar que funciona?</li>
+                    <li><input type="checkbox"> ¿Incluye solución a problemas comunes?</li>
+                    <li><input type="checkbox"> ¿Tiene información de contacto?</li>
+                    <li><input type="checkbox"> ¿Usa formato claro?</li>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ ERRORES COMUNES:</strong>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Suponer que el lector sabe cosas</li>
+                        <li>Instrucciones vagas ("configurar el sistema")</li>
+                        <li>No incluir qué hacer si falla</li>
+                        <li>Fechas desactualizadas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tarea para Casa -->
+            <div class="section">
+                <h2><span class="emoji-large">🏠</span> Tarea para Casa</h2>
+                <div class="card">
+                    <h4>📝 Documenta algo de tu vida</h4>
+                    <p>Elige algo cotidiano y escríbelo como documentación técnica:</p>
+                    <div class="example-box">
+TÍTULO: Cómo preparar Café con Leche
+
+REQUISITOS:
+• Cafetera • Café molido • Leche • Taza
+
+PASOS:
+1. Poner agua en la cafetera
+2. Agregar café en el filtro
+3. Encender cafetera
+4. Calentar leche (1 min)
+5. Servir y mezclar
+
+VERIFICACIÓN:
+• ¿Sabe bien? → Sí/No
+• ¿Está caliente? → Sí/No
+
+PROBLEMAS COMUNES:
+• Café aguado → poner más café
+• Café amargo → poner menos café
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto Esperado -->
+            <div class="section" style="border-left-color: #38a169; background: #f0fff4;">
+                <h2><span class="emoji-large">📱</span> Producto Esperado (PE7)</h2>
+                
+                <div class="badge" style="background: #9ae6b4; color: #22543d;">ENTREGABLE</div>
+                
+                <h3 style="margin-top: 1rem;">Documento Técnico Completo</h3>
+                
+                <p><strong>Debe incluir:</strong></p>
+                <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <li>✅ MÍNIMO 5 pasos de configuración detallados</li>
+                    <li>✅ MÍNIMO 4 variables de entorno</li>
+                    <li>✅ MÍNIMO 3 pruebas de verificación</li>
+                    <li>✅ MÍNIMO 3 problemas comunes con solución</li>
+                    <li>✅ Formato profesional (títulos, tablas, listas)</li>
+                </ul>
+
+                <div class="example-box" style="background: #2d3748;">
+DOCUMENTACIÓN TÉCNICA - [Tu nombre]
+Materia: Trazabilidad y Configuración de Software
+Fecha: ______________
+
+REFLEXIÓN FINAL:
+1. ¿Qué fue lo más difícil de documentar?
+2. ¿Por qué es importante documentar la configuración?
+3. ¿Qué mejorarías de tu documentación?
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="button" onclick="alert('¡Completa tu documento siguiendo la plantilla!')">
+                        📥 Descargar Plantilla
+                    </button>
+                </div>
+            </div>
+
+            <!-- Frase final -->
+            <div style="text-align: center; padding: 2rem; font-style: italic; color: #718096;">
+                "La mejor documentación es la que nadie necesita leer, pero cuando alguien la necesita, le salva la vida."
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 - Práctica de Documentación de Configuración</p>
+            <p style="font-size: 0.8rem; opacity: 0.8;">Trazabilidad y Configuración de Software - Semana 7</p>
+        </div>
+    </div>
+
+    <script>
+        // Pequeña interacción para el checklist
+        document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                let parent = this.closest('li');
+                if (this.checked) {
+                    parent.style.background = '#f0fff4';
+                    parent.style.borderColor = '#38a169';
+                } else {
+                    parent.style.background = 'white';
+                    parent.style.borderColor = '#e2e8f0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
